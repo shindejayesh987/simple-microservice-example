@@ -1,6 +1,6 @@
 # Simple Microservice Example
 
-A very simple microservice example with NodeJS, Python and Mongo
+A very simple microservice example with NodeJS, Python, Redis, and Mongo
 
 ## Dependencies
 
