@@ -54,4 +54,4 @@ To build this to fit your own **IP Address** please follow the steps before runn
 ## Final Result
 * check `http://YOUR_HOST:80` to see web app
 
-![image](https://user-images.githubusercontent.com/13379595/42726706-82eb0ae6-87b6-11e8-8456-d933b9dfa73b.png)
+![image](https://raw.githubusercontent.com/CSUChico-CSCI644/simple-microservice-example/main/working.png)
