@@ -8,9 +8,9 @@ $(document).ready(function() {
             dataType: "json",
             timeout: 3000,
             success: function(data) {
-                $("#quote").removeClass('is-danger') 
+                $("#quote").removeClass('is-danger')
                 $("#quote").addClass('is-link')
-                $( "#quote" ).html(data.quote.quote + '</br><b>'+ data.quote.by +'</b>'); 
+                $( "#quote" ).html(data.quote.quote + '</br><b>'+ data.quote.by +'</b>'+ '</br><i>Quotes Recieved:'+ data.quote.count +'</i>');
             },
             error: function(xmlhttprequest, textstatus, message) {
                 $("#quote").removeClass('is-link')
