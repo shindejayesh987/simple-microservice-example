@@ -105,6 +105,18 @@ sudo systemctl enable apigateway.service
 sudo systemctl start apigateway
 ```
 
+## NGINX
+
+Now we need to update/change the configuration for NGINX.
+
+```bash
+sudo rm /etc/nginx/sites-enabled/default
+sudo cp FrontendApplication/vhost.conf /etc/nginx/sites-available/
+sudo ln -s /etc/nginx/sites-available/vhost.conf /etc/nginx/sites-enabled/default
+sudo systemctrl restart nginx
+```
+
+
 ## Final Result
 * check `http://YOUR_HOST:80` to see web app
 
