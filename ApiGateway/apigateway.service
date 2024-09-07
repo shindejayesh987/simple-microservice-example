@@ -1,0 +1,13 @@
+[Unit]
+Description=API Gateway Service Application
+After=network.target
+
+[Service]
+Environment="QUOTES_API=http://35.208.5.221"
+User=bryandixon
+WorkingDirectory=/home/bryandixon/simple-microservice-example/ApiGateway/
+ExecStart=npm run start
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

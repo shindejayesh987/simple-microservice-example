@@ -42,7 +42,7 @@ To build this to fit your own **IP Address** please follow the steps before runn
 
 - To pass this setting to webpack build you need to set an Environment Variable
     - Windows : `set API_GATEWAY=http://YOUR_HOST`
-    - Linux/Max : `API_GATEWAY=http://YOUR_HOST`
+    - Linux/Max : `export API_GATEWAY=http://YOUR_HOST`
     * Remember no / at the end of the URL to get your web app work
     * You will need to add a port if not using standard ports
 
@@ -50,6 +50,60 @@ To build this to fit your own **IP Address** please follow the steps before runn
 
 - Check `dist/` folder for newly created index.html and the main.js
 
+- Copy `dist/` folder contents to `/var/www/html` to overwrite the default nginx files.
+
+## Initialize MongoDB
+
+Follow the instructions from [Mongo to install MongoDB on Ubuntu.](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/)
+
+Make sure to run the systemd(systemctl) instructions at the end to enable and start MongoDB running as a background service.
+
+## Initialize Redis
+
+Follow the instructions from [Redis to install Redis on Ubuntu.](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/install-redis-on-linux/)
+
+Then enable/start redis running as a daemon service.
+
+```bash
+sudo systemctl enable redis-server
+sudo systemctl start redis
+sudo systemctl status redis
+```
+
+## QuoteService Service
+
+Create a python virtual environment and install the dependencies
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+Update the main.py file to point to localhost for mongo and redis. Then update the quote.service file to match your local paths to python and your code. Copy the quote.service file to */etc/systemd/system/quote.service* and then enable the QuoteService daemon service.
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable quote.service
+sudo systemctl start quote
+```
+
+## API Gateway
+
+- Go to *ApiGateway* directory
+
+- Run `npm install`
+
+- Update the environment in the apigateway.service file to have your host.
+    - `Environment="QUOTES_API=http://YOUR_HOST"`
+
+Now can deploy API Gateway service. Copy the apigateway.service file to */etc/systemd/system/apigateway.service* and then enable the ApiGateway daemon service.
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable apigateway.service
+sudo systemctl start apigateway
+```
 
 ## Final Result
 * check `http://YOUR_HOST:80` to see web app
